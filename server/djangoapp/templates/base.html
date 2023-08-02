@@ -10,6 +10,10 @@
         .bg-light-blue {
             background-color: #e0f4f9; /* Replace with your desired light blue color code */
         }
+        #navbar-custom .username {
+            color: blue;
+            font-weight: bold;
+        }
 
     </style>
     <meta charset="UTF-8">
@@ -30,7 +34,7 @@
             {% if user.is_authenticated %}
             <!-- For authenticated users -->
             <li class="nav-item">
-                <a class="nav-link" href="#">{{ user.first_name }} ({{ user.username }})</a>
+                <a class="nav-link" href="#" style="color: blue;">{{ user.first_name }} ({{ user.username }})</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
