@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .bg-cream {
+            background-color: #f9ead9; /* Replace with your desired light cream color code */
+        }
+        .bg-light-blue {
+            background-color: #e0f4f9; /* Replace with your desired light blue color code */
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <title>{% block title %}Dealership Review{% endblock %}</title>
+    <!-- Add any additional CSS or meta tags here if needed -->
+
+</head>
+<body>
+
+<!-- Add a nav bar here -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Best Cars Dealership</a>
+
+        <!-- Navigation links -->
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <!-- For authenticated users -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">{{ user.first_name }} ({{ user.username }})</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <!-- For non-authenticated users -->
+            <li class="nav-item">
+                <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" class="form-control mr-sm-2" placeholder="Username" name="username">
+                    <input type="password" class="form-control mr-sm-2" placeholder="Password" name="password">
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Login</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-link" href="{% url 'djangoapp:signup' %}">Sign Up</a>
+            </li>
+            {% endif %}
+
+            <!-- Add menu links for About Us and Contact Us pages -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'djangoapp:about-us' %}">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'djangoapp:contact-us' %}">Contact Us</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    {% block content %}
+    <!-- Default content if not overridden by child templates -->
+    {% endblock %}
+</div>
+
+<!-- Add any additional scripts here if needed -->
+
+</body>
+</html>
